@@ -1,8 +1,7 @@
 <div class="comments">
   <h2 class="comments__title">Comments ({{ site.data.comments[page.id] | size | default: 0 }})</h2>
 
-  {% assign post_id = page.id | replace: '/', '-' %}
-  {% assign comments = site.data.comments[post_id] | default: '' %}
+  {% assign comments = site.data.comments[page.id] | default: '' %}
 
   {% if comments %}
     {% for comment in comments %}
@@ -29,25 +28,13 @@
     method="POST"
     action="https://sionta-staticman.up.railway.app/v2/entry/sionta/test-blog/master/comments"
   >
-    <input type="hidden" name="options[slug]" value="{{ post_id }}">
+    <input type="hidden" name="options[slug]" value="{{ page.id }}">
     <input type="hidden" name="options[redirect]" value="{{ page.url | relative_url }}#comments">
 
     <div class="comment-form__field">
       <label for="name" class="comment-form__label">Name</label>
-      <input type="text" id="name" name="fields[name]" class="comment-form__input" required>
+      <input type="text" id="name" name="fields[name]" class="comment-form__input" required autocomplete="name">
     </div>
-
-    {% comment %}
-      <div class="comment-form__field">
-        <label for="email" class="comment-form__label">Email</label>
-        <input type="email" id="email" name="fields[email]" class="comment-form__input">
-      </div>
-
-      <div class="comment-form__field">
-        <label for="url" class="comment-form__label">Website</label>
-        <input type="url" id="url" name="fields[url]" class="comment-form__input">
-      </div>
-    {% endcomment %}
 
     <div class="comment-form__field">
       <label for="message" class="comment-form__label">Comment</label>
