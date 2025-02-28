@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
   <body id="app">
+    {% assign site_url = site.url | append: site.baseurl %}
     <header class="header">
       <a
         class="header__logo"
-        href="{{ '/' | realative_url }}"
-        aria-label="Homepage">{{ site.title }}</a>
+        href="{{ site_url | default: '/' | realative_url }}"
+        aria-label="Homepage"
+      >
+        {{- site.title -}}
+      </a>
       {% if site.navigation and site.navigation.size > 0 %}
         <nav class="header__nav">
           <button class="header__menu-button header__menu-button--mobile">Menu</button>
@@ -23,12 +27,15 @@
                 <li class="nav__item">
                   <a
                     {% if page.url == nav.url %}
-                    class="nav__link nav__link--active"
+                      class="nav__link nav__link--active"
                     {% else %}
-                    class="nav__link"
+                      class="nav__link"
                     {% endif %}
                     href="{{ nav.url | relative_url }}"
-                    title="{{ nav.title }}">{{- nav.title -}}</a>
+                    title="{{ nav.title }}"
+                  >
+                    {{- nav.title -}}
+                  </a>
                 </li>
               {% endif %}
             {% endfor %}
@@ -44,7 +51,10 @@
     <footer class="site-footer">
       <div class="wrapper">
         <div class="cluster">
-          <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+          <p>
+            &copy; {{ site.time | date: '%Y' }}
+            {{ site.title }}
+          </p>
         </div>
       </div>
     </footer>
