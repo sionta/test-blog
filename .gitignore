@@ -1,5 +1,25 @@
+## Jekyll
 _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-vendor
+
+## Bundler & Gems
+.bundle
+/vendor
+*.gem
+Gemfile.lock
+
+## Node
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment files
+.env
+*.local
+.env*.local
+
+# Vercel CLI
+.vercel
