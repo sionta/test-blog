@@ -1,18 +1,28 @@
-<section id="comments" class="comments">
-  {% assign comments = site.data.comments[page.slug] %}
-  <h2 class="comments__title">Comments ({{ comments | size | default: 0 }})</h2>
+{% assign staticman_comments = site.data.comments[page.slug] %}
+{% assign staticman_endpoint = site.staticman.api
+  | append: '/'
+  | append: site.staticman.repo
+  | append: '/'
+  | append: site.staticman.branch
+  | append: '/comments'
+%}
 
-  {% if comments %}
+<section class="comments">
+  <h2 class="comments__title">Comments ({{ staticman_comments | size | default: 0 }})</h2>
+
+  {% if staticman_comments %}
+    {% assign comments = staticman_comments | sort %}
     {% for comment in comments %}
+      {% assign commentData = comment[1] %}
       <div class="comment">
         <div class="comment__header">
-          <h3 class="comment__author">{{ comment.name }}</h3>
-          <time class="comment__date" datetime="{{ comment.date | date_to_xmlschema }}">
-            {{ comment.date | date: '%d %B %Y, %H:%M' }}
+          <h3 class="comment__author">{{ commentData.name }}</h3>
+          <time class="comment__date" datetime="{{ commentData.date | date_to_xmlschema }}">
+            {{ commentData.date | date: '%d %B %Y, %H:%M' }}
           </time>
         </div>
         <div class="comment__content">
-          <p>{{ comment.message }}</p>
+          {{ commentData.message | markdownify }}
         </div>
       </div>
     {% endfor %}
@@ -23,21 +33,23 @@
 
 <section class="comment-form">
   <h2 class="comment-form__title">Leave a comment</h2>
-  <form
-    method="POST"
-    action="{{ site.staticman.api }}/{{ site.staticman.repo }}/{{ site.staticman.branch }}/comments"
-  >
-    <input type="hidden" name="options[redirect]" value="{{ page.url | relative_url }}#comments">
+  <form method="POST" action="{{ staticman_endpoint }}">
+    <input type="hidden" name="options[redirect]" value="{{ site.url }}{{ page.url }}">
     <input type="hidden" name="options[slug]" value="{{ page.slug }}">
 
     <div class="comment-form__field">
       <label for="name" class="comment-form__label">Name</label>
-      <input type="text" id="name" name="fields[name]" class="comment-form__input" required autocomplete="name">
+      <input type="text" id="name" name="fields[name]" class="comment-form__input" required>
     </div>
 
     <div class="comment-form__field">
-      <label for="message" class="comment-form__label">Comment</label>
-      <textarea id="message" name="fields[message]" class="comment-form__textarea" required></textarea>
+      <label for="email" class="comment-form__label">Email</label>
+      <input type="email" id="email" name="fields[email]" class="comment-form__input">
+    </div>
+
+    <div class="comment-form__field">
+      <label for="comment" class="comment-form__label">Comment</label>
+      <textarea id="comment" name="fields[message]" class="comment-form__textarea" required></textarea>
     </div>
 
     <button type="submit" class="comment-form__button">Send</button>
