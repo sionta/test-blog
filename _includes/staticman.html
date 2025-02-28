@@ -30,7 +30,7 @@
     action="https://sionta-staticman.up.railway.app/v2/entry/sionta/test-blog/master/comments"
   >
     <input type="hidden" name="options[slug]" value="{{ post_id }}">
-    <input type="hidden" name="options[redirect]" value="{{ page.url }}#comments">
+    <input type="hidden" name="options[redirect]" value="{{ page.url | relative_url }}#comments">
 
     <div class="comment-form__field">
       <label for="name" class="comment-form__label">Name</label>
