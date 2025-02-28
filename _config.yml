@@ -11,7 +11,7 @@ url: "" # the base hostname & protocol, e.g. https://example.com (no trailing sl
 
 # Staticman settings
 staticman:
-  endpoint: https://sionta-staticman.up.railway.app/v3/entry/github # (no trailing slash)
+  endpoint: https://sionta-staticman.up.railway.app/v3/entry # (no trailing slash)
   repository: sionta/test-blog # GitHub username/repo
   branch: master # Branch yang digunakan untuk komentar
 
