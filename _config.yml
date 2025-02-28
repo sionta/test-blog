@@ -1,0 +1,107 @@
+##******** SITE SETTINGS ********##
+
+title: Site Title
+tagline: A short description of your site
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this line
+  in _config.yml. It will appear in your document head meta (for Google search
+  results) and in your feed.xml site description.
+baseurl: "/test-blog" # the subpath of your site, e.g. /blog (no trailing slash)
+url: "https://sionta.github.io" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
+
+# Staticman settings
+staticman:
+  endpoint: https://sionta-staticman.up.railway.app/v3/entry/github # (no trailing slash)
+  repository: sionta/test-blog # GitHub username/repo
+  branch: master # Branch yang digunakan untuk komentar
+
+## Default Image Settings
+#logo: "/assets/img/logo.png" # Site logo
+#image: "/assets/img/default.jpg" # Post image
+
+## Language & Geographic Settings
+lang: en
+timezone: Asia/Tokyo
+
+## Global author, for multiple author see https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#author-information
+#author:
+#  name: Your Name
+#  twitter: your-twitter-username
+
+## Social & OG Settings
+twitter:
+  username: your-twitter-username
+  card: summary # summary, summary_large_image, app, player
+social:
+  name: Your Name
+  email: example@mail.com
+  links:
+    - https://twitter.com/your-twitter
+    - https://www.facebook.com/your-facebook
+    - https://www.linkedin.com/in/your-linkedin
+    - https://github.com/your-github
+
+## Pagination
+paginate: 12
+paginate_path: "/blog/page:num/"
+
+## Navigation
+navigation:
+  - index.html
+  - blog/index.html
+  - pages/about.md
+  - pages/contact.md
+
+## Taxonomies
+jekyll-archives:
+  layout: archive
+  enabled: [categories, tags]
+  permalinks:
+    category: "/category/:name/"
+    tag: "/tag/:name/"
+
+##******** BUILD SETTINGS ********##
+#theme: jekyll-theme-monoline
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: "/blog/:title/"
+
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  ## Table of contents
+  toc_levels: 2..3
+  auto_ids: true
+  ## Syntax highlighting
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    block:
+      line_numbers: true
+      start_line: 1
+    span:
+      line_numbers: false
+
+sass:
+  style: compressed
+  sourcemap: development
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - "script/"
+  - "vendor/"
+  - "node_modules/"
+  - "package*.json"
+  - "yarn.lock"
+  - "vercel.json"
+  - "netlify.toml"
+  - "LICENSE"
+  - "README.md"
+  - "CODE_OF_CONDUCT.md"

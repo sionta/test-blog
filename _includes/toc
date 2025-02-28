@@ -1,0 +1,10 @@
+{%- capture tocMarkdown -%}
+<details class="toc toc--markdown"{%- if include.open -%}{{- ' open' -}}{%- endif -%}>
+  <summary class="toc__title">{{ include.title | default: 'Table of Contents' }} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="icon icon--toc"><rect width="256" height="256" fill="none"/><polyline points="48 160 128 80 208 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg></summary>
+  <nav id="toc" class="toc__block" markdown="1" role="doc-toc" aria-label="Table of Content">
+* Auto generated table of contents
+{:toc .toc__list }
+  </nav>
+</details>
+{%- endcapture -%}
+{{- tocMarkdown -}}

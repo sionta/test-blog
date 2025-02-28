@@ -1,0 +1,5 @@
+paginate: 4
+
+sass:
+  style: expanded
+  sourcemap: development

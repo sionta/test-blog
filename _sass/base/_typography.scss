@@ -1,0 +1,80 @@
+@use "../abstracts/variables";
+
+.prose {
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: variables.$heading-margin-top;
+    margin-bottom: variables.$heading-margin-bottom;
+  }
+
+  // Paragraphs
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  // Lists
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  // Links
+  a {
+    color: #0066cc;
+    text-decoration: underline solid 1px;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #004499;
+      text-decoration-style: dotted;
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    padding-left: 1rem;
+    border-left: 4px solid #e0e0e0;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+  }
+
+  // Code
+  code,
+  pre {
+    font-family: variables.$font-family-mono;
+    font-size: 0.875rem;
+  }
+
+  code {
+    padding: 0.2em 0.4em;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+  }
+
+  pre {
+    font-size: 0.9rem;
+    padding: 1rem;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+
+    code {
+      background: none;
+      font: inherit;
+      padding: 0;
+    }
+  }
+}
