@@ -1,5 +1,16 @@
 @use "../abstracts/variables";
 
+:root {
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 3px;
+
+  --color-dark: #000;
+  --color-dark: #000;
+  --color-light: #fff;
+  --color-light-2: #ccc;
+}
+
 // Set defaults
 html {
   font-size: variables.$base-font-size;

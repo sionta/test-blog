@@ -4,32 +4,27 @@ layout: default
 {% assign date_format = '%-d %B %Y' %}
 <div class="wrapper">
   <article class="article cluster">
-    <div class="article__header">
-      <div class="article__categories">
-        <span class="article__category">Music</span>
-        <span class="article__category">Vinyl</span>
-      </div>
+    <header class="article__header">
+      {% if page.categories and page.categories.size > 0 %}
+        <div class="article__categories">
+          {% for category in page.categories %}
+            <span class="article__category">{{ category | upcase }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <h1 class="article__title">{{ page.title }}</h1>
       <div class="article__meta">
         <span class="article__author">Author: {{ page.author | join: ', ' }}</span>
         <span class="article__date">Published: {{ page.date | date: date_format }}</span>
       </div>
-    </div>
+    </header>
 
-    {% if page.image %}
-      <div class="article__image-container">
-        <img
-          src="https://placehold.co/1000x400"
-          alt="Vinyl Record Collection"
-          class="article__image"
-        >
-        <div class="article__image-caption">Photo: Vinyl collection at MySite</div>
-      </div>
-    {% endif %}
+    {% include post-image.html %}
 
-    <div class="article__content">
+    <section class="article__content">
       {{ content }}
-    </div>
+    </section>
 
     {% if page.tags and page.tags.size > 0 %}
       <div class="article__tags">
@@ -39,46 +34,8 @@ layout: default
       </div>
     {% endif %}
 
-    <div class="author">
-      <div class="author__avatar"></div>
-      <div class="author__info">
-        <div class="author__name">Ivan Ivanov</div>
-        <div class="author__bio">
-          Music critic, vinyl collector and founder of MySite. Has been writing about music and culture for over 15
-          years. Owner of a collection of over 3,000 vinyl records.
-        </div>
-      </div>
-    </div>
-
-    <div class="related-posts">
-      <h2 class="related-posts__title">Related articles</h2>
-      <div class="related-posts__list">
-        <div class="related-post">
-          <div class="related-post__image"></div>
-          <div class="related-post__content">
-            <h3 class="related-post__title">How to Choose the Perfect Turntable</h3>
-            <div class="related-post__date">15 February 2025</div>
-          </div>
-        </div>
-
-        <div class="related-post">
-          <div class="related-post__image"></div>
-          <div class="related-post__content">
-            <h3 class="related-post__title">Top 10 Rare Soviet Records</h3>
-            <div class="related-post__date">February 10, 2025</div>
-          </div>
-        </div>
-
-        <div class="related-post">
-          <div class="related-post__image"></div>
-          <div class="related-post__content">
-            <h3 class="related-post__title">Music formats of the future: what's next?</h3>
-            <div class="related-post__date">February 5, 2025</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    {% include post-author.html %}
+    {% include related-post.html %}
     {% include staticman.html %}
   </article>
 </div>
