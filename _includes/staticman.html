@@ -1,16 +1,15 @@
-<div class="comments">
-  <h2 class="comments__title">Comments ({{ site.data.comments[page.id] | size | default: 0 }})</h2>
-
-  {% assign comments = site.data.comments[page.id] | default: '' %}
+<section class="comments">
+  {% assign comments = site.data.comments[page.slug] %}
+  <h2 class="comments__title">Comments ({{ comments | size | default: 0 }})</h2>
 
   {% if comments %}
     {% for comment in comments %}
       <div class="comment">
         <div class="comment__header">
-          <div class="comment__author">{{ comment.name }}</div>
-          <div class="comment__date">
+          <h3 class="comment__author">{{ comment.name }}</h3>
+          <time class="comment__date" datetime="{{ comment.date | date_to_xmlschema }}">
             {{ comment.date | date: '%d %B %Y, %H:%M' }}
-          </div>
+          </time>
         </div>
         <div class="comment__content">
           <p>{{ comment.message }}</p>
@@ -20,16 +19,16 @@
   {% else %}
     <p class="comments__empty">No comments yet. Be the first to comment!</p>
   {% endif %}
-</div>
+</section>
 
-<div class="comment-form">
+<section class="comment-form">
   <h2 class="comment-form__title">Leave a comment</h2>
   <form
     method="POST"
     action="https://sionta-staticman.up.railway.app/v2/entry/sionta/test-blog/master/comments"
   >
-    <input type="hidden" name="options[slug]" value="{{ page.id }}">
     <input type="hidden" name="options[redirect]" value="{{ page.url | relative_url }}#comments">
+    <input type="hidden" name="options[slug]" value="{{ page.slug }}">
 
     <div class="comment-form__field">
       <label for="name" class="comment-form__label">Name</label>
@@ -43,4 +42,4 @@
 
     <button type="submit" class="comment-form__button">Send</button>
   </form>
-</div>
+</section>
