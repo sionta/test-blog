@@ -9,7 +9,7 @@ layout: default
 {% endif %}
 
 <div class="wrapper">
-  <div class="blog cluster">
+  <article class="blog cluster">
     {% if site.archives %}
       <section class="blog__cluster" aria-label="Topics">
         <h2 class="blog__title">Topics</h2>
@@ -19,7 +19,8 @@ layout: default
               <a
                 class="topics__link"
                 href="{{ archive.url | relative_url }}"
-                title="Archive of posts with {{ archive.type }} {{ archive.title | capitalize }}">
+                title="Archive of posts with {{ archive.type }} {{ archive.title | capitalize }}"
+              >
                 {{- archive.title -}}
               </a>
             </li>
@@ -27,34 +28,40 @@ layout: default
         </ol>
       </section>
     {% endif %}
+
     <section class="blog__cluster" aria-label="Posts">
       <h2 class="blog__title">Posts</h2>
       <p class="blog__description">Find the latest articles on technology, design, and web development.</p>
       <ul class="blog__posts">
         {% for post in posts %}
           <li class="blog-card">
-            {% assign p_image = 'https://placehold.co/600x400/EEE/31343C?font=roboto&text=' | append: forloop.index %}
-            {% assign img_url = post.image.url | default: post.image | default: site.image | default: p_image %}
+            {% assign img_url = post.image.url | default: post.image | default: site.image %}
             {% assign img_alt = post.image.alt | default: post.title %}
-            <div class="blog-card__image">
-              <a href="{{ post.url | relative_url }}">
-                <img
-                  src="{{ img_url | relative_url }}"
-                  alt="{{ img_alt | escape }}"
-                  loading="lazy">
-              </a>
-            </div>
+            {% if img_url %}
+              <div class="blog-card__image">
+                <a href="{{ post.url | relative_url }}">
+                  <img
+                    src="{{ img_url | relative_url }}"
+                    alt="{{ img_alt | escape }}"
+                    loading="lazy"
+                  >
+                </a>
+              </div>
+            {% endif %}
+
             <div class="blog-card__cluster">
               <h3 class="blog-card__title">
                 <a class="blog-card__link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
               </h3>
               <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: date_format }}</time>
+                <time class="blog-card__date" datetime="{{ post.date | date_to_xmlschema }}">
+                  {{- post.date | date: date_format -}}
+                </time>
               </div>
             </div>
           </li>
         {% endfor %}
       </ul>
     </section>
-  </div>
+  </article>
 </div>
