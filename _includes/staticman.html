@@ -9,7 +9,9 @@
       <div class="comment">
         <div class="comment__header">
           <div class="comment__author">{{ comment.name }}</div>
-          <div class="comment__date">{{ comment.date }}</div>
+          <div class="comment__date">
+            {{ comment.date | date: '%d %B %Y, %H:%M' }}
+          </div>
         </div>
         <div class="comment__content">
           <p>{{ comment.message }}</p>
@@ -25,49 +27,29 @@
   <h2 class="comment-form__title">Leave a comment</h2>
   <form
     method="POST"
-    action="{{ site.staticman.endpoint }}/{{ site.staticman.repository }}/{{ site.staticman.branch }}/comments"
+    action="https://sionta-staticman.up.railway.app/v3/entry/sionta/test-blog/master/comments"
   >
-    <input
-      type="hidden"
-      name="options[redirect]"
-      value="{{ page.url }}#comments"
-    >
-    <input
-      type="hidden"
-      name="options[postId]"
-      value="{{ post_id }}"
-    >
+    <input type="hidden" name="options[slug]" value="{{ post_id }}">
+    <input type="hidden" name="options[redirect]" value="{{ page.url }}#comments">
 
     <div class="comment-form__field">
       <label for="name" class="comment-form__label">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="fields[name]"
-        class="comment-form__input"
-        autocomplete="name"
-        required
-      >
+      <input type="text" id="name" name="fields[name]" class="comment-form__input" required>
     </div>
-    {% comment %}
-      <div class="comment-form__field">
-        <label for="email" class="comment-form__label">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="fields[email]"
-          class="comment-form__input"
-          autocomplete="email">
-      </div>
-    {% endcomment %}
+
     <div class="comment-form__field">
-      <label for="comment" class="comment-form__label">Comment</label>
-      <textarea
-        id="comment"
-        name="fields[message]"
-        class="comment-form__textarea"
-        required
-      ></textarea>
+      <label for="email" class="comment-form__label">Email</label>
+      <input type="email" id="email" name="fields[email]" class="comment-form__input">
+    </div>
+
+    <div class="comment-form__field">
+      <label for="url" class="comment-form__label">Website</label>
+      <input type="url" id="url" name="fields[url]" class="comment-form__input">
+    </div>
+
+    <div class="comment-form__field">
+      <label for="message" class="comment-form__label">Comment</label>
+      <textarea id="message" name="fields[message]" class="comment-form__textarea" required></textarea>
     </div>
 
     <button type="submit" class="comment-form__button">Send</button>
