@@ -6,7 +6,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this line
   in _config.yml. It will appear in your document head meta (for Google search
   results) and in your feed.xml site description.
-baseurl: "/test-blog" # the subpath of your site, e.g. /blog (no trailing slash)
+baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
 url: "https://sionta.github.io" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
 
 ## Staticman settings
@@ -29,17 +29,18 @@ timezone: Asia/Tokyo
 #  twitter: your-twitter-username
 
 ## Social & OG Settings
+email: &email example@mail.com
 twitter:
-  username: your-twitter-username
+  username: blog-test
   card: summary # summary, summary_large_image, app, player
 social:
   name: Your Name
-  email: example@mail.com
+  email: *email
   links:
-    - https://twitter.com/your-twitter
-    - https://www.facebook.com/your-facebook
-    - https://www.linkedin.com/in/your-linkedin
-    - https://github.com/your-github
+    - https://twitter.com/blog-test
+    - https://www.facebook.com/blog-test
+    - https://www.linkedin.com/in/blog-test
+    - https://github.com/sionta/blog-test
 
 ## Pagination
 paginate: 12
