@@ -12,7 +12,7 @@ url: "https://sionta.github.io" # the base hostname & protocol, e.g. https://exa
 ## Staticman settings
 staticman:
   api: https://a2bb62c.up.railway.app/v2/entry # Staticman API (no trailing slash)
-  repo: sionta/test-blog # GitHub username/repo
+  repo: sionta/test-blog # username/repo
   branch: master # Branch yang digunakan untuk komentar
 
 ## Default Image Settings
