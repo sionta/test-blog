@@ -2,12 +2,12 @@
 
 title: Site Title
 tagline: A short description of your site
-description: >- # this means to ignore newlines until "baseurl:"
+description: >
   Write an awesome description for your new site here. You can edit this line
   in _config.yml. It will appear in your document head meta (for Google search
   results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
-url: "https://sionta.github.io" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
+url: "" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
 
 ## Staticman settings
 staticman:
@@ -24,23 +24,22 @@ lang: en
 timezone: Asia/Tokyo
 
 ## Global author, for multiple author see https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#author-information
-#author:
-#  name: Your Name
-#  twitter: your-twitter-username
+author:
+  name: Andre Attamimi
+  twitter: R007MMXV
 
 ## Social & OG Settings
-email: &email example@mail.com
+email: &DEFAULT_EMAIL example@mail.com
 twitter:
-  username: blog-test
+  username: R007MMXV
   card: summary # summary, summary_large_image, app, player
 social:
-  name: Your Name
-  email: *email
+  name: Andre Attamimi
+  email: *DEFAULT_EMAIL
   links:
-    - https://twitter.com/blog-test
-    - https://www.facebook.com/blog-test
-    - https://www.linkedin.com/in/blog-test
-    - https://github.com/sionta/blog-test
+    - https://github.com/sionta
+    - https://x.com/R007MMXV
+    - https://www.linkedin.com/in/andreattamimi
 
 ## Pagination
 paginate: 12

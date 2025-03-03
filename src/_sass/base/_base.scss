@@ -6,7 +6,7 @@
   --border-width: 3px;
 
   --color-dark: #000;
-  --color-dark: #000;
+  --color-dark-2: #222;
   --color-light: #fff;
   --color-light-2: #ccc;
 }
@@ -21,7 +21,7 @@ html {
     font-size: calc(variables.$base-font-size - 1px);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 576px) {
     font-size: calc(variables.$base-font-size - 2px);
   }
 }
@@ -64,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-  // font-family: variables.$heading-font-family;
+  font-family: variables.$heading-font-family;
   font-weight: variables.$heading-font-weight;
   line-height: variables.$heading-line-height;
   color: variables.$heading-color;

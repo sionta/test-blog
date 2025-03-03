@@ -5,8 +5,8 @@ _site
 .jekyll-metadata
 
 ## Bundler & Gems
-.bundle
-/vendor
+.bundle/
+vendor/
 *.gem
 Gemfile.lock
 

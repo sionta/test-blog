@@ -1,0 +1,81 @@
+{% assign reply_id = include.reply_id %}
+{% assign comment_id = include.comment_id %}
+{% assign staticman_endpoint = site.staticman.api
+  | append: '/'
+  | append: site.staticman.repo
+  | append: '/'
+  | append: site.staticman.branch
+  | append: '/comments'
+%}
+
+{% comment %} PARENT {% endcomment %}
+<form method="POST" action="{{ staticman_endpoint }}">
+  <input type="hidden" name="options[redirect]" value="{{ page.id | absolute_url }}#comments">
+  <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+  {% if comment_id %}
+    <input type="hidden" name="fields[replying_to]" value="{{ comment_id }}">
+  {% endif %}
+
+  <div class="comment-form__field">
+    <label class="comment-form__label" for="name">Name</label>
+    <input class="comment-form__input" id="name" type="text" name="fields[name]" required autocomplete="name">
+  </div>
+
+  <div class="comment-form__field">
+    <label class="comment-form__label" for="message">Comment</label>
+    <textarea class="comment-form__textarea" id="message" name="fields[message]" rows="3" required></textarea>
+  </div>
+
+  <div class="comment-form__action">
+    <button type="submit" class="comment-form__button">Send</button>
+    {% if reply_id %}
+      <button
+        type="button"
+        class="comment-form__button comment-form__button--cancel"
+        onclick="hideReplyForm('{{ reply_id }}')"
+      >
+        Cancel
+      </button>
+    {% endif %}
+  </div>
+</form>
+
+{% comment %} CHILD {% endcomment %}
+<form method="POST" action="{{ staticman_endpoint }}">
+  <input type="hidden" name="options[redirect]" value="{{ page.id | absolute_url }}#comments">
+  <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+  <input type="hidden" name="fields[replying_to]" value="{{ comment_id }}">
+
+  <div class="comment-form__field">
+    <label for="name-{{ reply_id }}" class="comment-form__label">Name</label>
+    <input
+      type="text"
+      id="name-{{ reply_id }}"
+      name="fields[name]"
+      class="comment-form__input"
+      required
+      autocomplete="name"
+    >
+  </div>
+
+  <div class="comment-form__field">
+    <label for="comment-{{ reply_id }}" class="comment-form__label">Comment</label>
+    <textarea
+      id="comment-{{ reply_id }}"
+      name="fields[message]"
+      class="comment-form__textarea"
+      required
+    ></textarea>
+  </div>
+
+  <div class="comment-form__btns">
+    <button type="submit" class="comment-form__button">Kirim Balasan</button>
+    <button
+      type="button"
+      class="comment-form__button comment-form__button--cancel"
+      onclick="hideReplyForm('{{ reply_id }}')"
+    >
+      Batal
+    </button>
+  </div>
+</form>

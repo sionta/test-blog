@@ -57,7 +57,7 @@
   color: var(--color-light);
 }
 
-.header__menu-button {
+.nav__button {
   padding: 0.5rem;
   background: var(--color-light);
   border: var(--border-width) var(--border-style) var(--border-color);
@@ -65,12 +65,12 @@
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .header__menu-button--mobile {
-    display: none;
-  }
-
+@media (min-width: 576px) {
   .nav {
     display: flex;
+
+    &__button--mobile {
+      display: none;
+    }
   }
 }

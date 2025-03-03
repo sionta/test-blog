@@ -1,0 +1,221 @@
+{% assign staticman_comments = site.data.comments[page.slug] %}
+{% assign staticman_endpoint = site.staticman.api
+  | append: '/'
+  | append: site.staticman.repo
+  | append: '/'
+  | append: site.staticman.branch
+  | append: '/comments'
+%}
+
+<section id="comments" class="comments">
+  <h2 class="comments__title">Comments ({{ staticman_comments | size | default: 0 }})</h2>
+
+  {% if staticman_comments %}
+    {% assign comments = staticman_comments | sort %}
+    <ul class="comments__list">
+      {% for comment in comments %}
+        {% assign commentData = comment[1] %}
+        {% assign comment_id = comment[0] %}
+
+        {% unless commentData.replying_to %}
+          <li id="{{ comment_id }}" class="comment">
+            <div class="comment__header">
+              <h3 class="comment__author">{{ commentData.name }}</h3>
+              <time class="comment__date" datetime="{{ commentData.date | date_to_xmlschema }}">
+                {{ commentData.date | date: '%d %B %Y, %H:%M' }}
+              </time>
+            </div>
+            <div class="comment__content">
+              {{ commentData.message | markdownify }}
+            </div>
+
+            <div class="comment__reply-cluster">
+              <button class="comment__reply-btn" onclick="showReplyForm('{{ comment_id }}')">
+                Reply to {{ commentData.name }}
+              </button>
+
+              <!-- Reply form for this comment -->
+              <div id="reply-form-{{ comment_id }}" class="reply-form" style="display: none;">
+                <form method="POST" action="{{ staticman_endpoint }}">
+                  <input type="hidden" name="options[redirect]" value="{{ page.id | absolute_url }}#comments">
+                  <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+                  <input type="hidden" name="fields[replying_to]" value="{{ comment_id }}">
+
+                  <div class="comment-form__field">
+                    <label for="name-{{ comment_id }}" class="comment-form__label">Name</label>
+                    <input
+                      type="text"
+                      id="name-{{ comment_id }}"
+                      name="fields[name]"
+                      class="comment-form__input"
+                      required
+                      autocomplete="name"
+                    >
+                  </div>
+
+                  <div class="comment-form__field">
+                    <label for="comment-{{ comment_id }}" class="comment-form__label">Comment</label>
+                    <textarea
+                      id="comment-{{ comment_id }}"
+                      name="fields[message]"
+                      class="comment-form__textarea"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" class="comment-form__button">Kirim Balasan</button>
+                  <button
+                    type="button"
+                    class="comment-form__button comment-form__button--cancel"
+                    onclick="hideReplyForm('{{ comment_id }}')"
+                  >
+                    Batal
+                  </button>
+                </form>
+              </div>
+
+              <!-- Nested replies for this comment -->
+              {% assign replies = staticman_comments | where_exp: 'item', 'item[1].replying_to == comment_id' %}
+              {% if replies.size > 0 %}
+                <div class="comment__replies">
+                  {% for reply in replies %}
+                    {% assign replyData = reply[1] %}
+                    {% assign reply_id = reply[0] %}
+                    <div id="{{ reply_id }}" class="comment comment--reply">
+                      <div class="comment__header">
+                        <h4 class="comment__author">{{ replyData.name }}</h4>
+                        <time class="comment__date" datetime="{{ replyData.date | date_to_xmlschema }}">
+                          {{ replyData.date | date: '%d %B %Y, %H:%M' }}
+                        </time>
+                      </div>
+                      <div class="comment__content">
+                        {{ replyData.message | markdownify }}
+                      </div>
+                      <button class="comment__reply-btn" onclick="showReplyForm('{{ reply_id }}')">Balas</button>
+
+                      <!-- Reply form for this nested reply -->
+                      <div id="reply-form-{{ reply_id }}" class="reply-form" style="display: none;">
+                        <form method="POST" action="{{ staticman_endpoint }}">
+                          <input type="hidden" name="options[redirect]" value="{{ page.id | absolute_url }}#comments">
+                          <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+                          <input type="hidden" name="fields[replying_to]" value="{{ comment_id }}">
+
+                          <div class="comment-form__field">
+                            <label for="name-{{ reply_id }}" class="comment-form__label">Name</label>
+                            <input
+                              type="text"
+                              id="name-{{ reply_id }}"
+                              name="fields[name]"
+                              class="comment-form__input"
+                              required
+                              autocomplete="name"
+                            >
+                          </div>
+
+                          <div class="comment-form__field">
+                            <label for="comment-{{ reply_id }}" class="comment-form__label">Comment</label>
+                            <textarea
+                              id="comment-{{ reply_id }}"
+                              name="fields[message]"
+                              class="comment-form__textarea"
+                              required
+                            ></textarea>
+                          </div>
+
+                          <div class="comment-form__btns">
+                            <button type="submit" class="comment-form__button">Kirim Balasan</button>
+                            <button
+                              type="button"
+                              class="comment-form__button comment-form__button--cancel"
+                              onclick="hideReplyForm('{{ reply_id }}')"
+                            >
+                              Batal
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p class="comments__empty">No comments yet. Be the first to comment!</p>
+  {% endif %}
+</section>
+
+<section class="comment-form">
+  <h2 class="comment-form__title">Leave a comment</h2>
+  <form method="POST" action="{{ staticman_endpoint }}">
+    <input type="hidden" name="options[redirect]" value="{{ page.id | absolute_url }}#comments">
+    <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+
+    <div class="comment-form__field">
+      <label for="name" class="comment-form__label">Name</label>
+      <input type="text" id="name" name="fields[name]" class="comment-form__input" required autocomplete="name">
+    </div>
+
+    <div class="comment-form__field">
+      <label for="comment" class="comment-form__label">Comment</label>
+      <textarea id="comment" name="fields[message]" class="comment-form__textarea" required></textarea>
+    </div>
+
+    <button type="submit" class="comment-form__button">Send</button>
+  </form>
+</section>
+
+<!-- JavaScript for toggling reply forms -->
+<script>
+  function showReplyForm(commentId) {
+    document.getElementById(`reply-form-${commentId}`).style.display = 'block';
+  }
+
+  function hideReplyForm(commentId) {
+    document.getElementById(`reply-form-${commentId}`).style.display = 'none';
+  }
+</script>
+
+<!-- CSS untuk styling nested comments -->
+<style>
+  .comment--reply {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    background-color: #f0f0f0;
+    border-left: 3px solid #ccc;
+  }
+
+  .comment__replies {
+    margin-top: 1rem;
+  }
+
+  .comment__reply-btn {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+
+  .comment__reply-btn:hover {
+    background-color: #d0d0d0;
+  }
+
+  .comment-form__button--cancel {
+    background-color: #f0f0f0;
+    margin-left: 0.5rem;
+  }
+
+  .reply-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 0.3rem;
+  }
+</style>

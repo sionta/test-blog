@@ -9,11 +9,19 @@
     padding-bottom: 0.5rem;
   }
 }
+
+.comments__list {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  list-style: none;
+}
+
 .comment {
   border: var(--border-width) var(--border-style) var(--border-color);
   padding: 1rem;
   background-color: var(--color-light);
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 
   &__header {
     display: flex;

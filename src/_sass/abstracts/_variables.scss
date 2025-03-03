@@ -30,9 +30,9 @@ $font-size-4xl: 2.25rem !default; // 36px
 $font-size-5xl: 3rem !default; // 48px
 
 // Headings
-$heading-font-family: $font-family-sans !default;
+$heading-font-family: inherit !default;
 $heading-font-weight: 600 !default;
 $heading-line-height: 1.2 !default;
-$heading-color: #333 !default;
+$heading-color: inherit !default;
 $heading-margin-top: 1.5em !default;
 $heading-margin-bottom: 0.5em !default;
