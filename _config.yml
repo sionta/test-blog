@@ -49,7 +49,7 @@ navigation:
 
 ## Site domain settings
 baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
-url: "sionta-blog-test.netlify.app" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
+url: "https://sionta-blog-test.netlify.app" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
 
 ## Staticman settings
 staticman:
