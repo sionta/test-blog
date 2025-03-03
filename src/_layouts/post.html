@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: base
 ---
 {% assign date_format = '%-d %B %Y' %}
 <div class="wrapper">
@@ -15,7 +15,9 @@ layout: default
 
       <h1 class="article__title">{{ page.title }}</h1>
       <div class="article__meta">
-        <span class="article__author">Author: {{ page.author | join: ', ' }}</span>
+        {% if page.author -%}
+          <span class="article__author">Author: {{ page.author.name | default: page.author }}</span>
+        {%- endif %}
         <span class="article__date">Published: {{ page.date | date: date_format }}</span>
       </div>
     </header>
@@ -35,7 +37,7 @@ layout: default
     {% endif %}
 
     {% include post-author.html %}
-    {% include related-post.html %}
-    {% include comment.html %}
+    {% include post-related.html %}
+    {% include post-comment.html %}
   </article>
 </div>

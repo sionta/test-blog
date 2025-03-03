@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  {% include head.html %}
+
+  <body id="app">
+    {% include header.html %}
+
+    <main id="main" data-layout="{{ page.layout }}">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+    <div class="contact-button">
+      <a href="tel:+1234567890" class="contact-button__link">
+        <span class="contact-button__icon"></span>
+      </a>
+    </div>
+
+    <script src="{{ '/assets/js/script.js' | relative_url }}" defer></script>
+  </body>
+</html>

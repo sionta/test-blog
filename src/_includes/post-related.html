@@ -1,0 +1,46 @@
+{%- assign date_format = '%-d %B %Y' -%}
+{%- assign relatedBy = 'categories' -%}
+{%- assign relatedPosts = '' -%}
+{%- assign maxRelated = 3 -%}
+{%- assign minCommonTags = 1 -%}
+{%- assign maxRelatedCounter = 0 -%}
+
+{%- for post in site.posts -%}
+  {%- assign sameTagCount = 0 -%}
+  {%- for tag in post[relatedBy] -%}
+    {%- if post.url != page.url -%}
+      {%- if page[relatedBy] contains tag -%}
+        {%- assign sameTagCount = sameTagCount | plus: 1 -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if sameTagCount >= minCommonTags -%}
+    {%- if maxRelatedCounter < maxRelated -%}
+      {%- capture relatedItem -%}
+      <li class="related-post">
+        {%- if post.image -%}
+          {%- assign img_url = post.image.path | default: post.image -%}
+          {%- assign img_alt = post.alt | default: post.title -%}
+          <img class="related-post__image" src="{{ img_url | relative_url }}" alt="{{ img_alt }}" loading="lazy">
+        {%- endif -%}
+        <div class="related-post__content">
+          <h3 class="related-post__title"><a class="related-post__link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="related-post__meta"><time class="related-post__date" datetime="{{ post.date | date_to_xmlschema  }}">{{- post.date | date: date_format -}}</time></p>
+        </div>
+      </li>
+      {%- endcapture -%}
+      {%- assign relatedPosts = relatedPosts | append: relatedItem | strip -%}
+      {%- assign maxRelatedCounter = maxRelatedCounter | plus: 1 -%}
+      {%- assign relatedItem = '' -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if relatedPosts and relatedPosts.size > 0 -%}
+  <section class="related-posts">
+    <h2 class="related-posts__title">Related articles</h2>
+    <ul class="related-posts__list">
+      {{ relatedPosts }}
+    </ul>
+  </section>
+{%- endif -%}

@@ -1,7 +1,7 @@
 {% assign reply_id = include.reply_id %}
 {% assign comment_id = include.comment_id %}
 {% assign staticman_endpoint = site.staticman.api
-  | append: '/'
+  | append: '/v2/entry/'
   | append: site.staticman.repo
   | append: '/'
   | append: site.staticman.branch

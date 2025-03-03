@@ -1,19 +1,24 @@
 ##******** SITE SETTINGS ********##
 
-title: Site Title
-tagline: A short description of your site
-description: >
-  Write an awesome description for your new site here. You can edit this line
-  in _config.yml. It will appear in your document head meta (for Google search
-  results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
-url: "https://sionta.github.io" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
+title: Andre Attamimi
+tagline: Learn, Practice, Share and Grow
+# The `>` after `description:` means to ignore line-breaks until next key.
+# If you want to omit the line-break after the end of text, use `>-` instead.
+description: &AUTHOR_BIO >
+  I strongly believe in the importance of learning, practicing, sharing, and growing.
+  I am also committed to doing this in my life, so that it benefits both myself and others.
 
-## Staticman settings
-staticman:
-  api: https://a2bb62c.up.railway.app/v2/entry # Staticman API (no trailing slash)
-  repo: sionta/test-blog # username/repo
-  branch: master # Branch yang digunakan untuk komentar
+## Global author, for multiple author see https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#author-information
+author: &POST_AUTHOR
+  name: Andre Attamimi
+  email: rumatua0@gmail.com
+  url: https://github.com/sionta
+  twitter: &TWITTER R007MMXV
+  bio: *AUTHOR_BIO
+  #picture: /assets/img/logo.svg
+
+baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
+url: "" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
 
 ## Default Image Settings
 #logo: "/assets/img/logo.png" # Site logo
@@ -23,27 +28,16 @@ staticman:
 lang: en
 timezone: Asia/Tokyo
 
-## Global author, for multiple author see https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#author-information
-author:
-  name: Andre Attamimi
-  twitter: R007MMXV
-
 ## Social & OG Settings
-email: &DEFAULT_EMAIL example@mail.com
 twitter:
-  username: R007MMXV
+  username: *TWITTER
   card: summary # summary, summary_large_image, app, player
 social:
-  name: Andre Attamimi
-  email: *DEFAULT_EMAIL
+  <<: *POST_AUTHOR
   links:
-    - https://github.com/sionta
     - https://x.com/R007MMXV
+    - https://github.com/sionta
     - https://www.linkedin.com/in/andreattamimi
-
-## Pagination
-paginate: 12
-paginate_path: "/blog/page:num/"
 
 ## Navigation
 navigation:
@@ -52,16 +46,29 @@ navigation:
   - pages/about.md
   - pages/contact.md
 
-## Taxonomies
+## Pagination
+#paginate: 12
+#paginate_path: "/blog/page:num/"
+
+## Staticman settings
+staticman:
+  api: https://a2bb62c.up.railway.app # Staticman API (no trailing slash)
+  repo: sionta/blog-test # username/repo
+  branch: master
+
+##******** BUILD SETTINGS ********##
+
 jekyll-archives:
   layout: archive
-  enabled: [categories, tags]
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive
+    tag: archive
   permalinks:
     category: "/category/:name/"
     tag: "/tag/:name/"
-
-##******** BUILD SETTINGS ********##
-#theme: jekyll-theme-monoline
 
 defaults:
   - scope:
@@ -70,6 +77,8 @@ defaults:
     values:
       layout: post
       permalink: "/blog/:title/"
+      author:
+        <<: *POST_AUTHOR
 
 highlighter: rouge
 markdown: kramdown
@@ -82,11 +91,11 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: highlight
-    block:
-      line_numbers: true
-      start_line: 1
-    span:
-      line_numbers: false
+    #block:
+    #  line_numbers: true
+    #  start_line: 1
+    #span:
+    #  line_numbers: false
 
 sass:
   style: compressed

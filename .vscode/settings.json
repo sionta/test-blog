@@ -1,11 +1,16 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.ignorePath": ".prettierignore",
+  "files.associations": {
+    "*.html": "liquid",
+    "**/_includes/**": "liquid"
+  },
   "[liquid]": {
     "editor.defaultFormatter": "Shopify.theme-check-vscode",
     "editor.formatOnSave": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.associations": {
-    "*.html": "liquid",
-    "**/_includes/**": "liquid"
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }
+

@@ -1,0 +1,28 @@
+{
+  "name": "blog-test",
+  "version": "0.1.0",
+  "author": "Andre Attamimi",
+  "description": "Just read, write, and share story",
+  "homepage": "https://github.com/sionta/blog-test",
+  "main": "Gulpfile.mjs",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "bundle exec jekyll build --source src --config _config.yml",
+    "minify": "npx gulp"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-ignore": "^3.0.0",
+    "gulp-imagemin": "^9.1.0",
+    "gulp-json-minify": "^1.2.3",
+    "gulp-uglify": "^3.0.2"
+  },
+  "keywords": [
+    "jekyll",
+    "jekyll-blog",
+    "jekyll-theme"
+  ]
+}

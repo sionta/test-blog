@@ -1,0 +1,78 @@
+{% comment %} TODO: W3C https://design-system.w3.org/components/pagination.html {% endcomment %}
+{% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Pagination">
+    <ul class="pagination__list">
+      {% comment %} Previous {% endcomment %}
+      <li class="pagination__item pagination__item--previous">
+        {% if paginator.previous_page %}
+          <a
+            class="pagination__link"
+            aria-label="Page previous"
+            href="{{ paginator.previous_page_path | relative_url }}"
+            >Prev</a
+          >
+        {% else %}
+          <span class="pagination__link pagination__link--disabled">Prev</span>
+        {% endif %}
+      </li>
+
+      {% comment %} Totals {% endcomment %}
+      <ol class="pagination__list__totals">
+        {% for count in (1..paginator.total_pages) %}
+          <li class="pagination__item">
+            {% if count == paginator.page %}
+              <a
+                class="pagination__link pagination__link--current"
+                aria-current="page"
+                aria-label="Page {{ count }}"
+                href="#"
+              >
+                {{- count -}}
+              </a>
+            {% elsif count == 1 %}
+              <a
+                class="pagination__link"
+                aria-label="Page {{ count }}"
+                href="{{ site.paginate_path | relative_url | replace: 'page:num/', '' }}"
+              >
+                {{- count -}}
+              </a>
+            {% else %}
+              <a
+                class="pagination__link"
+                aria-label="Page {{ count }}"
+                href="{{ site.paginate_path | relative_url | replace: ':num', count }}"
+              >
+                {{- count -}}
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+
+        {% comment %} Just for testing what if the value is longer {% endcomment %}
+        {% comment %}
+          {% assign test_totals = paginator.total_pages | plus: 1 %}
+          {% for item in (test_totals..20) %}
+            <li class="pagination__item">
+              <a class="pagination__link" aria-label="Page {{ item }}" href="#">{{- item -}}</a>
+            </li>
+          {% endfor %}
+        {% endcomment %}
+      </ol>
+
+      {% comment %} Next {% endcomment %}
+      <li class="pagination__item pagination__item--next">
+        {% if paginator.next_page %}
+          <a
+            class="pagination__link"
+            aria-label="Page next"
+            href="{{ paginator.next_page_path | relative_url }}"
+            >Next</a
+          >
+        {% else %}
+          <span class="pagination__link pagination__link--disabled">Next</span>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+{% endif %}

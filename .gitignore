@@ -5,10 +5,12 @@ _site
 .jekyll-metadata
 
 ## Bundler & Gems
-.bundle/
-vendor/
+.bundle
+vendor
 *.gem
-Gemfile.lock
+#Gemfile.lock
+
+!/src/vendor
 
 ## Node
 node_modules
@@ -17,9 +19,6 @@ pnpm-lock.yaml
 yarn.lock
 
 # Environment files
-.env
 *.local
+.env
 .env*.local
-
-# Vercel CLI
-.vercel

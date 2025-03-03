@@ -1,8 +1,38 @@
+# This is the configuration file for development environment.
+# You can use this file to override the default configuration settings.
+
 baseurl: ""
 url: ""
 
 paginate: 4
 
+show_drafts: true
+
 sass:
   style: expanded
-  sourcemap: development
+  sass_dir: _sass
+  sourcemap: always
+  #quiet_deps: false
+  verbose: true
+
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  # https://kramdown.gettalong.org/syntax_highlighter/rouge.html
+  # https://github.com/rouge-ruby/rouge#full-options
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    disable: false
+    css_class: highlight # CSS classes for code blocks
+    #default_lang: console
+    #guess_lang: unknown
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true # Displays the line number in the code block
+      start_line: 1 # Displays the line number in the code block
+      line_class: lineno
+      table_class: rouge-table # - CSS class of table block (default rouge-table)
+      gutter_class: rouge-line # - CSS class of line number (default rouge-gutter)
+      code_class: rouge-code # - CSS class of code content, (default rouge-code)
+

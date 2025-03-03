@@ -1,3 +1,6 @@
+Set-StrictMode -Off
+Set-Location "$PSScriptRoot/.."
+
 $JEKYLL_CONFIG = '_config.yml,_config.dev.yml'
 $JEKYLL_SOURCE = './src'
 

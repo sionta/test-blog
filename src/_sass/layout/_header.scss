@@ -1,6 +1,7 @@
 /* Block */
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: #f5f5f0;
   border-bottom: var(--border-width) var(--border-style) var(--border-color);
@@ -24,53 +25,71 @@
 
 /* Block */
 .nav {
-  display: none;
+  display: flex;
+  gap: 0.5rem;
   list-style: none;
+
+  &__button--mobile {
+    display: none;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+
+    &__button--mobile {
+      display: block;
+      z-index: 100;
+    }
+
+    &--mobile {
+      position: absolute;
+      right: 5.5rem;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 /* Element of nav */
 .nav__item {
   display: inline-block;
-  margin-left: 5px;
 }
 
 /* Element of nav */
 .nav__link {
-  padding: 0.5rem 1rem;
-  color: var(--color-dark);
-  text-decoration: none;
-  border: 2px solid var(--color-dark);
-  background-color: var(--color-light);
   display: block;
+  background-color: var(--color-light);
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
   transition: transform 0.2s;
-}
 
-.nav__link:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 3px 3px 0 var(--color-dark);
-}
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--color-dark);
+  }
 
-/* Modifier of nav__link */
-.nav__link--active {
-  font-weight: bold;
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  /* Modifier of nav__link */
+  &--active {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    font-weight: bold;
+
+    &:hover {
+      background-color: var(--color-light);
+      color: var(--color-dark);
+    }
+  }
 }
 
 .nav__button {
-  padding: 0.5rem;
   background: var(--color-light);
   border: var(--border-width) var(--border-style) var(--border-color);
-  font-weight: bold;
   cursor: pointer;
-}
-
-@media (min-width: 576px) {
-  .nav {
-    display: flex;
-
-    &__button--mobile {
-      display: none;
-    }
-  }
+  font-weight: bold;
+  padding: 0.5rem;
 }

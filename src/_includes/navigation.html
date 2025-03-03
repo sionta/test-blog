@@ -1,0 +1,28 @@
+{%- assign nav_pages = site.data.navigation | default: site.navigation -%}
+{%- if nav_pages and nav_pages.size > 0 -%}
+  <nav class="header__nav">
+    <button class="nav__button nav__button--mobile" id="nav-mobile-action">Menu</button>
+    <ul class="nav" id="nav-mobile-target">
+      {%- for item in nav_pages -%}
+        {%- assign nav_page = site.pages | where: 'path', item | first -%}
+        {%- assign nav_page_name = nav_page.title -%}
+        {%- assign nav_page_link = nav_page.url -%}
+        {%- assign nav_page_link_class = 'nav__link' -%}
+        {%- if page.url == nav_page_link -%}
+          {%- assign nav_page_link_class = nav_page_link_class | append: ' nav__link--active' -%}
+        {%- endif -%}
+        {%- if nav_page_name %}
+          <li class="nav__item">
+            <a
+              class="{{- nav_page_link_class | strip -}}"
+              href="{{- nav_page_link | relative_url -}}"
+              title="{{- nav_page_name | escape -}}"
+            >
+              {{- nav_page_name | escape -}}
+            </a>
+          </li>
+        {%- endif %}
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
