@@ -17,9 +17,6 @@ author: &POST_AUTHOR
   bio: *AUTHOR_BIO
   #picture: /assets/img/logo.svg
 
-baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
-url: "" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
-
 ## Default Image Settings
 #logo: "/assets/img/logo.png" # Site logo
 #image: "/assets/img/default.jpg" # Post image
@@ -49,6 +46,10 @@ navigation:
 ## Pagination
 #paginate: 12
 #paginate_path: "/blog/page:num/"
+
+## Site domain settings
+baseurl: "" # the subpath of your site, e.g. /blog (no trailing slash)
+url: "sionta-blog-test.netlify.app" # the base hostname & protocol, e.g. https://example.com (no trailing slash)
 
 ## Staticman settings
 staticman:
